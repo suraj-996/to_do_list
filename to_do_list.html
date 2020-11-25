@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>To Do List</title>
+</head>
+<body>
+    <div>
+        <form id="creator">
+            <input type="text" id="item"/>
+            <input type="submit"/>
+        </form>
+        <hr>
+        <table>
+            <thead id="items">
+                <tr>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+    <script type="text/javascript">
+        var creatorForm = document.getElementById("creator");
+        var itemsParent = document.getElementById("items");
+
+        function submitForm(event) {
+            var item = document.getElementById('item').value;
+            createItem(item);
+            event.preventDefault();
+        }
+
+        function createItem(item) {
+            var row = document.createElement('tr');
+            var col1 = document.createElement('td');
+            col1.textContent = item;
+            var col2 = document.createElement('td');
+            var btn = document.createElement('button');
+            btn.textContent = "Mark Complete";
+            btn.addEventListener('click', markComplete);
+
+            // Adding Btn to Col2
+            col2.appendChild(btn);
+
+            // Adding Col1 and Col2 to row
+            row.appendChild(col1);
+            row.appendChild(col2);
+
+            // Adding row to items tbody
+            itemsParent.appendChild(row)
+        } 
+
+        function markComplete(event) {
+            var item = event.target;
+            item.textContent = "Completed";
+            item.style.color = "green";
+        }
+        creatorForm.addEventListener('submit', submitForm);
+    </script>
+</body>
+</html>
